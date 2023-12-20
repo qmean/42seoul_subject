@@ -1,0 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kyumkim <kyumkim@student.42seoul.kr>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/02 13:44:02 by kyumkim           #+#    #+#             */
+/*   Updated: 2023/11/23 16:55:43 by kyumkim          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
+# include <stdlib.h>
+# include <unistd.h>
+
+# define BUFFER_SIZE 1
+
+char    *get_next_line(int fd);
+
+char    *make_output(char *str);
+size_t  ft_strlen(char *c);
+int     next_line_in_str(char *str);
+#endif
