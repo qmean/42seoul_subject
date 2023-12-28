@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyumkim <kyumkim@student.42.seoul.kr>      +#+  +:+       +#+        */
+/*   By: kyumkim <kyumkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 13:44:02 by kyumkim           #+#    #+#             */
-/*   Updated: 2023/12/22 15:31:37 by kyumkim          ###   ########.fr       */
+/*   Updated: 2023/12/22 17:08:36 by kyumkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,14 @@ typedef struct s_list
 {
 	char	data[BUFFER_SIZE];
 	int		fd;
-	t_list	*next;
+	struct s_list	*next;
 }	t_list;
 
 
-char	*get_next_line(int fd);
-char	*make_output(char *str);
-size_t	ft_strlen(char *c);
+// char	*get_next_line(int fd);
+// char	*make_output(char *str);
+// size_t	ft_strlen(char *c);
 
-int		next_line_in_str(char *str);
+// int		next_line_in_str(char *str);
 
 #endif
