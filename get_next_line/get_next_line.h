@@ -6,7 +6,7 @@
 /*   By: kyumkim <kyumkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 13:44:02 by kyumkim           #+#    #+#             */
-/*   Updated: 2023/12/22 17:08:36 by kyumkim          ###   ########.fr       */
+/*   Updated: 2023/12/29 10:34:15 by kyumkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,13 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-# define BUFFER_SIZE 100
+# define BUFFER_SIZE 15
 
 typedef struct s_list
 {
-	char	data[BUFFER_SIZE];
+	char	*data;
 	int		fd;
+    int     end;
 	struct s_list	*next;
 }	t_list;
 
