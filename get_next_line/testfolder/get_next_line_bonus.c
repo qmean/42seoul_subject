@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kyumkim <kyumkim@student.42.seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 13:43:30 by kyumkim           #+#    #+#             */
-/*   Updated: 2023/12/29 18:39:48 by kyumkim          ###   ########.fr       */
+/*   Updated: 2023/12/29 18:50:41 by kyumkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ int	readfile(char **str, int fd)
 		lineidx = newline_idx(*str);
 	while (lineidx == 0)
 	{
-		read_size = read(fd ,buffer, BUFFER_SIZE - 1);
+		read_size = read(fd, buffer, BUFFER_SIZE - 1);
 		if (read_size == -1)
 			return (-1);
 		else if (read_size == 0)
@@ -132,41 +132,5 @@ int	readfile(char **str, int fd)
 		if (strsum(str, buffer) == -1)
 			return (-1);
 	}
-	return (0);
-}
-
-void	ft_strdup(char *dest, char *src)
-{
-	while (*src != 0)
-	{
-		*dest = *src;
-		dest++;
-		src++;
-	}
-	*dest = 0;
-}
-
-int	strsum(char **dest, char *src)
-{
-	char	*tmp;
-
-	if (*dest == NULL)
-	{
-		*dest = (char *)malloc(ft_strlen(src) + 1);
-		if (*dest == NULL)
-			return (-1);
-		ft_strdup(*dest, src);
-		return (0);
-	}
-	else
-	{
-		tmp = (char *) malloc(ft_strlen(*dest) + ft_strlen(src) + 1);
-		if (tmp == NULL)
-			return (-1);
-	}
-	ft_strdup(tmp, *dest);
-	ft_strdup(tmp + ft_strlen(*dest), src);
-	free(*dest);
-	*dest = tmp;
 	return (0);
 }

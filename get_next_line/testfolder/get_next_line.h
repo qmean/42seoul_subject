@@ -6,7 +6,7 @@
 /*   By: kyumkim <kyumkim@student.42.seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 13:44:02 by kyumkim           #+#    #+#             */
-/*   Updated: 2023/12/29 18:27:08 by kyumkim          ###   ########.fr       */
+/*   Updated: 2023/12/29 19:01:44 by kyumkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-# define BUFFER_SIZE 15
+//# define BUFFER_SIZE
 
 typedef struct s_list
 {
