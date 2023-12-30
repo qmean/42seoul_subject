@@ -6,7 +6,7 @@
 /*   By: kyumkim <kyumkim@student.42.seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 13:43:30 by kyumkim           #+#    #+#             */
-/*   Updated: 2023/12/29 18:39:48 by kyumkim          ###   ########.fr       */
+/*   Updated: 2023/12/30 08:36:44 by kyumkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ char	*get_next_line(int fd)
 	int				read_flag;
 
 	tmp = lst;
+	if (BUFFER_SIZE < 1)
+		return (NULL);
 	while (tmp != NULL)
 	{
 		if (tmp->fd == fd)
@@ -114,7 +116,7 @@ char	*makeret(char *str)
 int	readfile(char **str, int fd)
 {
 	int		lineidx;
-	char	buffer[BUFFER_SIZE];
+	char	buffer[BUFFER_SIZE + 1];
 	int		read_size;
 
 	lineidx = 0;
@@ -122,7 +124,7 @@ int	readfile(char **str, int fd)
 		lineidx = newline_idx(*str);
 	while (lineidx == 0)
 	{
-		read_size = read(fd ,buffer, BUFFER_SIZE - 1);
+		read_size = read(fd ,buffer, BUFFER_SIZE);
 		if (read_size == -1)
 			return (-1);
 		else if (read_size == 0)
