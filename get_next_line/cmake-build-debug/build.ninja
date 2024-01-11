@@ -46,8 +46,8 @@ cmake_ninja_workdir = /Users/gimgyumin/Desktop/42/get_next_line/cmake-build-debu
 
 build cmake_object_order_depends_target_get_next_line: phony || CMakeFiles/get_next_line.dir
 
-build CMakeFiles/get_next_line.dir/get_next_line_test.c.o: C_COMPILER__get_next_line_Debug /Users/gimgyumin/Desktop/42/get_next_line/get_next_line_test.c || cmake_object_order_depends_target_get_next_line
-  DEP_FILE = CMakeFiles/get_next_line.dir/get_next_line_test.c.o.d
+build CMakeFiles/get_next_line.dir/get_next_line.c.o: C_COMPILER__get_next_line_Debug /Users/gimgyumin/Desktop/42/get_next_line/get_next_line.c || cmake_object_order_depends_target_get_next_line
+  DEP_FILE = CMakeFiles/get_next_line.dir/get_next_line.c.o.d
   FLAGS = -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.2
   OBJECT_DIR = CMakeFiles/get_next_line.dir
   OBJECT_FILE_DIR = CMakeFiles/get_next_line.dir
@@ -60,7 +60,7 @@ build CMakeFiles/get_next_line.dir/get_next_line_test.c.o: C_COMPILER__get_next_
 #############################################
 # Link the executable get_next_line
 
-build get_next_line: C_EXECUTABLE_LINKER__get_next_line_Debug CMakeFiles/get_next_line.dir/get_next_line_test.c.o
+build get_next_line: C_EXECUTABLE_LINKER__get_next_line_Debug CMakeFiles/get_next_line.dir/get_next_line.c.o
   FLAGS = -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.2
   OBJECT_DIR = CMakeFiles/get_next_line.dir
   POST_BUILD = :

@@ -14,123 +14,186 @@
 
 char	*get_next_line(int fd)
 {
-	static t_list	*lst;
-	char			*ret;
-	t_list			*tmp;
-	int				read_flag;
+    static char	*buffer[OPEN_MAX];
 
-	tmp = lst;
-	while (tmp != NULL)
-	{
-		if (tmp->fd == fd)
-			break ;
-		tmp = tmp->next;
-	}
-	if (tmp == NULL)
-		if (addfront(&lst, fd) == -1)
-			return (NULL);
-		tmp = lst;
-	read_flag = readfile(&tmp->data, fd);
-	if (read_flag == -1)
-		return (NULL);
-	else if (read_flag == 1)
-		ret = lastread(tmp);
-	ret = makeret(lst->data);
-	if (cutnewline(lst) == -1)
-		return (NULL);
-	return (ret);
+    if (BUFFER_SIZE < 1 || fd < 0 || fd > OPEN_MAX)
+        return (NULL);
+    if (readfile(&buffer[fd], fd) == -1)
+    {
+        free(buffer[fd]);
+        buffer[fd] = NULL;
+        return (NULL);
+    }
+    return (make_return(&buffer[fd]));
 }
 
-char	*lastread(t_list *lst)
+char	*make_return(char	**buffer)
 {
-	char	*ret;
+    int	lineidx;
 
-	if (lst->end == 1)
-		return (NULL);
-	else
-	{
-		ret = (char *)malloc(ft_strlen(lst->data) + 1);
-		ft_strdup(ret, lst->data);
-		free(lst->data);
-		lst->end = 1;
-		lst->data = NULL;
-	}
-	return (ret);
+    lineidx = newline_idx(*buffer);
+    if (lineidx == -1)
+        return (ft_strnstr(buffer, ft_strlen(*buffer) - 1));
+    else
+        return (ft_strnstr(buffer, lineidx));
 }
 
-int	cutnewline(t_list *lst)
+char    *ft_strdup(char *str)
 {
-	int		lineidx;
-	int		idx;
-	char	*str;
+    char    *ret;
+    int     retidx;
 
-	lineidx = newline_idx(lst->data);
-	if (lst->end == 1)
-	{
-		free(lst->data);
-		return (0);
-	}
-	str = (char *)malloc(ft_strlen(lst->data) - lineidx);
-	if (str == NULL)
-		return (-1);
-	idx = 0;
-	while (lst->data[lineidx + idx + 1] != 0)
-	{
-		str[idx] = lst->data[lineidx + idx + 1];
-		idx++;
-	}
-	str[idx] = 0;
-	free(lst->data);
-	lst->data = str;
-	return (0);
+    if (str == NULL)
+        return (NULL);
+    ret = malloc(ft_strlen(str) + 1);
+    retidx = 0;
+    while (*str != 0)
+    {
+        ret[retidx] = *str;
+        retidx++;
+        str++;
+    }
+    ret[retidx] = 0;
+    return (ret);
 }
-
-char	*makeret(char *str)
+char	*ft_strnstr(char **str, int endidx)
 {
-	int		lineidx;
-	int		idx;
-	char	*ret;
+    char	*ret;
+    char	*tmp;
+    char    *freeptr;
+    int		idx;
 
-	lineidx = newline_idx(str);
-	if (lineidx == 0)
-		ret = (char *)malloc(ft_strlen(str) + 1);
-	else
-		ret = (char *)malloc(lineidx + 2);
-	if (ret == NULL)
-		return (NULL);
-	idx = 0;
-	while (*str != '\n' && *str != 0)
-	{
-		ret[idx] = *str;
-		idx++;
-		str++;
-	}
-	if (*str == '\n')
-		ret[idx++] = '\n';
-	ret[idx] = 0;
-	return (ret);
+
+    if ((ft_strlen(*str) - endidx) == 0)
+    {
+        ret = ft_strdup(*str);
+        free(*str);
+        *str = NULL;
+        return (ret);
+    }
+    ret = malloc(endidx + 2);
+    tmp = malloc(ft_strlen(*str) - endidx);
+    if (ret == NULL || tmp == NULL)
+        return (NULL);
+    idx = 0;
+    freeptr = *str;
+    while (idx <= endidx)
+    {
+        ret[idx++] = **str;
+        (*str)++;
+    }
+    ret[idx] = 0;
+    idx = 0;
+    while (**str != 0)
+    {
+        tmp[idx++] = **str;
+        (*str)++;
+    }
+    tmp[idx] = 0;
+    free(freeptr);
+    *str = tmp;
+    return (ret);
 }
 
-int	readfile(char **str, int fd)
+int	readfile(char **buffer, int fd)
 {
-	int		lineidx;
-	char	buffer[BUFFER_SIZE];
-	int		read_size;
-
-	lineidx = 0;
-	if (*str != NULL)
-		lineidx = newline_idx(*str);
-	while (lineidx == 0)
-	{
-		read_size = read(fd, buffer, BUFFER_SIZE - 1);
-		if (read_size == -1)
-			return (-1);
-		else if (read_size == 0)
-			return (1);
-		buffer[read_size] = 0;
-		lineidx = newline_idx(buffer);
-		if (strsum(str, buffer) == -1)
-			return (-1);
-	}
-	return (0);
+    char	tmp[BUFFER_SIZE + 1];
+    int		read_size;
+    // read -1 일때 -1 리턴
+    // 파일의 끝에 도달했고(read가 0이고) 버퍼에 아무것도 없을때 -1 리턴
+    // 굳이 더 읽을 필요가 없을 때(이미 버퍼에 개행이 있을 때) 바로 0 리턴
+    if (newline_idx(*buffer) != -1)
+        return (0);
+    while(newline_idx(*buffer) == -1)
+    {
+        read_size = read(fd, tmp, BUFFER_SIZE);
+        if (read_size == -1)
+            return (-1);
+        else if (read_size == 0)
+        {
+            if (ft_strlen(*buffer) == 0)
+                return (-1);
+            break ;
+        }
+        tmp[read_size] = 0;
+        if (ft_strcat(buffer, tmp) == -1)
+            return (-1);
+    }
+    return (0);
 }
+
+int	ft_strcat(char **dest, char *src)
+{
+    char	*tmp;
+    char    *freeptr;
+    int		idx;
+
+    tmp = malloc(ft_strlen(*dest) + ft_strlen(src) + 1);
+    if (tmp == NULL)
+        return (-1);
+    idx = 0;
+    freeptr = *dest;
+    if (*dest != NULL)
+        while (**dest != 0)
+        {
+            tmp[idx] = **dest;
+            (*dest)++;
+            idx++;
+        }
+    while (*src != 0)
+    {
+        tmp[idx] = *src;
+        idx++;
+        src++;
+    }
+    tmp[idx] = 0;
+    free(freeptr);
+    *dest = tmp;
+    return (0);
+}
+
+int ft_strlen(char *str)
+{
+    int	ret;
+
+    if (str == NULL)
+        return (0);
+    ret = 0;
+    while (*str != 0)
+    {
+        str++;
+        ret++;
+    }
+    return (ret);
+}
+
+int	newline_idx(char *str)
+{
+    int	ret;
+
+    if (str == NULL)
+        return (-1);
+    ret = 0;
+    while (*str != 0)
+    {
+        if (*str == '\n')
+            return (ret);
+        ret++;
+        str++;
+    }
+    return (-1);
+}
+//
+//#include <fcntl.h>
+//#include <stdio.h>
+//
+//int main()
+//{
+//    int fd = open ("../test.txt",O_RDONLY);
+//    char    *output;
+//
+//    for (int i = 0; i < 7; ++i) {
+//        output = get_next_line(fd);
+//        printf("output : %s\n", output);
+//    }
+//}

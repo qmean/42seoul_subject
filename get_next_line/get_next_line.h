@@ -25,15 +25,13 @@ typedef struct s_list
 	struct s_list	*next;
 }	t_list;
 
-int		addfront(t_list **lst, int fd);
 char	*get_next_line(int fd);
-int		cutnewline(t_list *lst);
-char	*makeret(char *str);
-int		readfile(char **str, int fd);
-int		strsum(char **dest, char *src);
-int		ft_strlen(char *str);
-int		newline_idx(char *str);
-char	*lastread(t_list *lst);
-void	ft_strdup(char *dest, char *src);
+char	*make_return(char	**buffer);
+char	*ft_strnstr(char **str, int endidx);
+int	readfile(char **buffer, int fd);
+int	ft_strcat(char **dest, char *src);
+int ft_strlen(char *str);
+int	newline_idx(char *str);
+
 
 #endif
