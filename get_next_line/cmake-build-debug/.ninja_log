@@ -1,7 +1,0 @@
-# ninja log v5
-1	32	1703927816490209789	CMakeFiles/get_next_line.dir/get_next_line_string.c.o	df4751d0cef9acba
-0	60	1703930931887100184	build.ninja	68afbf0c7d50347a
-1	49	1703841334051313841	CMakeFiles/get_next_line.dir/get_next_line_test.c.o	9d6b2936ef5ecf8b
-1	32	1703242767645169256	CMakeFiles/get_next_line.dir/get_next_line.c.o	8ce0e6bb12a3eb73
-32	69	1703927816527573401	get_next_line	53ccba631d33069d
-0	64	1703930931887100184	build.ninja	68afbf0c7d50347a

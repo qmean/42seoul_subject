@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kyumkim <kyumkim@student.42.seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/30 08:44:30 by kyumkim           #+#    #+#             */
-/*   Updated: 2024/01/17 19:53:59 by kyumkim          ###   ########.fr       */
+/*   Created: 2023/11/02 13:43:30 by kyumkim           #+#    #+#             */
+/*   Updated: 2024/01/17 19:56:59 by kyumkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*get_next_line(int fd)
 {

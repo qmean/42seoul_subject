@@ -1,10 +1,10 @@
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 NAME = get_next_line
-SRCS = get_next_line.c get_next_line_util.c
+SRCS = get_next_line.c get_next_line_utils.c
 OBJS = $(SRCS:.c=.o)
 
-BONUSSRCS = get_next_line_bonus.c get_next_line_bonus_util.c
+BONUSSRCS = get_next_line_bonus.c get_next_line_utils_bonus.c
 BONUSOBJS = $(BONUSSRCS:.c=.o)
 
 $(NAME):$(OBJS)
@@ -16,7 +16,7 @@ make_bonus:$(BONUSOBJS) $(OBJS)
 
 
 ./%.o: ./%.c %.h
-	$(CC) $(CFLAGS) -c $<
+	$(CC) $(CFLAGS) -c -D BUFFER_SIZE=15 $<
 
 .PHONY: all, clean, fclean, re, bonus
 all:$(NAME)
@@ -32,5 +32,3 @@ fclean:
 re:
 	make fclean
 	make all
-
-bonus:make_bonus
