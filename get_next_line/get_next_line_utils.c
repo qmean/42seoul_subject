@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyumkim <kyumkim@student.42.seoul.kr>      +#+  +:+       +#+        */
+/*   By: kyumkim <kyumkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 13:47:37 by kyumkim           #+#    #+#             */
-/*   Updated: 2024/01/17 19:53:54 by kyumkim          ###   ########.fr       */
+/*   Updated: 2024/02/10 23:32:26 by kyumkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,4 +81,10 @@ int	newline_idx(char *str)
 		str++;
 	}
 	return (-1);
+}
+
+void	free_buffer(char **str, char *tmp)
+{
+	free(*str);
+	*str = tmp;
 }

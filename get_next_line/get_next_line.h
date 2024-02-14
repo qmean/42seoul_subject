@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyumkim <kyumkim@student.42.seoul.kr>      +#+  +:+       +#+        */
+/*   By: kyumkim <kyumkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 13:44:02 by kyumkim           #+#    #+#             */
-/*   Updated: 2024/01/17 20:06:00 by kyumkim          ###   ########.fr       */
+/*   Updated: 2024/02/10 23:32:50 by kyumkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,6 @@ int		readfile(char **buffer, int fd);
 int		ft_strcat(char **dest, char *src);
 int		ft_strlen(char *str);
 int		newline_idx(char *str);
+void	free_buffer(char **str, char *tmp);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyumkim <kyumkim@student.42.seoul.kr>      +#+  +:+       +#+        */
+/*   By: kyumkim <kyumkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 08:44:30 by kyumkim           #+#    #+#             */
-/*   Updated: 2024/01/17 19:53:59 by kyumkim          ###   ########.fr       */
+/*   Updated: 2024/02/10 23:34:23 by kyumkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,24 +68,25 @@ char	*ft_strnstr(char **str, int endidx)
 
 	if ((ft_strlen(*str) - endidx) == 0)
 	{
-		ret = ft_strdup(*str);
-		free(*str);
-		*str = NULL;
-		return (ret);
+		free_buffer(str, NULL);
+		return (ft_strdup(*str));
 	}
 	ret = malloc(endidx + 2);
 	if (ret == NULL)
+	{
+		free_buffer(str, NULL);
 		return (NULL);
+	}
 	tmp = malloc(ft_strlen(*str) - endidx);
 	if (tmp == NULL)
 	{
 		free(ret);
+		free_buffer(str, NULL);
 		return (NULL);
 	}
 	str_ncpy(ret, *str, endidx + 1);
 	str_ncpy(tmp, (*str) + endidx + 1, ft_strlen(*str) - endidx - 1);
-	free(*str);
-	*str = tmp;
+	free_buffer(str, tmp);
 	return (ret);
 }
 
@@ -94,11 +95,11 @@ void	str_ncpy(char *dest, char *src, int n)
 	int	idx;
 
 	idx = 0;
-	while (idx < n)
+	while (idx < n && *src != '\0')
 	{
 		dest[idx] = *src;
 		src++;
 		idx++;
 	}
-	dest[idx] = 0;
+	dest[idx] = '\0';
 }
