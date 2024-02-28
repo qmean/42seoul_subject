@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyumkim <kyumkim@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: kyumkim <kyumkim@student.42.seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 13:47:37 by kyumkim           #+#    #+#             */
-/*   Updated: 2024/02/10 23:35:27 by kyumkim          ###   ########.fr       */
+/*   Updated: 2024/02/28 13:19:10 by kyumkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

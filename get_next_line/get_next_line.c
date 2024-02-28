@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyumkim <kyumkim@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: kyumkim <kyumkim@student.42.seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 08:44:30 by kyumkim           #+#    #+#             */
-/*   Updated: 2024/02/10 23:34:23 by kyumkim          ###   ########.fr       */
+/*   Updated: 2024/02/28 13:20:54 by kyumkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ char	*make_return(char	**buffer)
 		return (NULL);
 	lineidx = newline_idx(*buffer);
 	if (lineidx == -1)
-		return (ft_strnstr(buffer, ft_strlen(*buffer) - 1));
+		return (ft_substr(buffer, ft_strlen(*buffer) - 1));
 	else
-		return (ft_strnstr(buffer, lineidx));
+		return (ft_substr(buffer, lineidx));
 }
 
 char	*ft_strdup(char *str)
@@ -61,7 +61,7 @@ char	*ft_strdup(char *str)
 	return (ret);
 }
 
-char	*ft_strnstr(char **str, int endidx)
+char	*ft_substr(char **str, int endidx)
 {
 	char	*ret;
 	char	*tmp;
