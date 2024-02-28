@@ -6,7 +6,7 @@
 /*   By: kyumkim <kyumkim@student.42.seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 13:44:02 by kyumkim           #+#    #+#             */
-/*   Updated: 2024/02/28 13:20:12 by kyumkim          ###   ########.fr       */
+/*   Updated: 2024/02/28 13:30:36 by kyumkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,10 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <limits.h>
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1
+# endif
 
 char	*get_next_line(int fd);
 char	*make_return(char	**buffer);
@@ -27,8 +31,4 @@ int		ft_strlen(char *str);
 int		newline_idx(char *str);
 void	free_buffer(char **str, char *tmp);
 
-#endif
-
-#ifndef BUFFER_SIZE
-# define BUFFER_SIZE 1
 #endif
