@@ -1,37 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kyumkim <kyumkim@student.42.seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/26 12:38:49 by kyumkim           #+#    #+#             */
-/*   Updated: 2023/11/07 15:36:51 by kyumkim          ###   ########.fr       */
+/*   Created: 2023/10/26 21:43:56 by kyumkim           #+#    #+#             */
+/*   Updated: 2023/10/29 12:17:59 by kyumkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_atoi(const char *str)
+char	*ft_strmapi(const char *s, char (*f)(unsigned int, char))
 {
-	long long	inp;
-	int			neg;
+	char	*ret;
+	int		idx;
 
-	inp = 0;
-	neg = 1;
-	while ((9 <= *str && *str <= 13) || *str == 32)
-		str++;
-	if (*str == '-' || *str == '+')
+	ret = (char *)malloc(sizeof(char) * ft_strlen(s) + 1);
+	if (ret == NULL)
+		return (NULL);
+	idx = 0;
+	while (*s != 0)
 	{
-		if (*str == '-')
-			neg = -1;
-		str++;
+		ret[idx] = f(idx, *s);
+		s++;
+		idx++;
 	}
-	while ('0' <= *str && *str <= '9')
-	{
-		inp *= 10;
-		inp += *str - '0';
-		str++;
-	}
-	return ((int)inp * neg);
+	ret[idx] = 0;
+	return (ret);
 }

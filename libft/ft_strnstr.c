@@ -3,34 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyumkim <kyumkim@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: kyumkim <kyumkim@student.42.seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 12:15:27 by kyumkim           #+#    #+#             */
-/*   Updated: 2023/10/26 12:38:31 by kyumkim          ###   ########.fr       */
+/*   Updated: 2023/12/07 17:41:50 by kyumkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "libft.h"
 
-char    *strnstr(const char *haystack, const char *needle, size_t len)
+char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
-    char    *inp;
-    int     idx;
+	char	*inp;
+	size_t	idx;
+	size_t	cnt;
 
-    while (*haystack != 0 && len--)
-    {
-        inp = haystack;
-        idx = 0;
-        while (needle[idx] != 0)
-        {
-            if (needle[idx] != *inp)
-                break;
-            inp++;
-            idx++;
-        }
-        if(needle[idx] == 0)
-            return (haystack);
-        haystack++;
-    }
-    return (0);
+	if (ft_strlen(needle) == 0)
+		return ((char *)haystack);
+	cnt = 0;
+	while (*haystack != 0 && cnt++ < len)
+	{
+		inp = (char *)haystack;
+		idx = 0;
+		while (needle[idx] != 0 && idx + cnt <= len)
+		{
+			if (needle[idx] != *inp)
+				break ;
+			inp++;
+			idx++;
+		}
+		if (needle[idx] == 0)
+			return ((char *)haystack);
+		haystack++;
+	}
+	return (0);
 }

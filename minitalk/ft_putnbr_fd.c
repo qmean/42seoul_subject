@@ -1,37 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kyumkim <kyumkim@student.42.seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/26 12:38:49 by kyumkim           #+#    #+#             */
-/*   Updated: 2023/11/07 15:36:51 by kyumkim          ###   ########.fr       */
+/*   Created: 2023/10/26 21:51:41 by kyumkim           #+#    #+#             */
+/*   Updated: 2023/12/07 17:37:33 by kyumkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_atoi(const char *str)
-{
-	long long	inp;
-	int			neg;
+void	printnum(long long n, int fd);
 
-	inp = 0;
-	neg = 1;
-	while ((9 <= *str && *str <= 13) || *str == 32)
-		str++;
-	if (*str == '-' || *str == '+')
+void	ft_putnbr_fd(int n, int fd)
+{
+	if (fd < 0)
+		return ;
+	printnum((long long)n, fd);
+	return ;
+}
+
+void	printnum(long long n, int fd)
+{
+	if (n < 0)
 	{
-		if (*str == '-')
-			neg = -1;
-		str++;
+		write(fd, "-", 1);
+		n *= -1;
 	}
-	while ('0' <= *str && *str <= '9')
-	{
-		inp *= 10;
-		inp += *str - '0';
-		str++;
-	}
-	return ((int)inp * neg);
+	if (n > 9)
+		printnum(n / 10, fd);
+	write(fd, &"0123456789"[n % 10], 1);
 }

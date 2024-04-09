@@ -1,37 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kyumkim <kyumkim@student.42.seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/26 12:38:49 by kyumkim           #+#    #+#             */
-/*   Updated: 2023/11/07 15:36:51 by kyumkim          ###   ########.fr       */
+/*   Created: 2023/10/24 22:45:25 by kyumkim           #+#    #+#             */
+/*   Updated: 2023/12/07 17:36:09 by kyumkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_atoi(const char *str)
+void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	long long	inp;
-	int			neg;
+	unsigned char	*d;
+	unsigned char	*s;
+	size_t			idx;
 
-	inp = 0;
-	neg = 1;
-	while ((9 <= *str && *str <= 13) || *str == 32)
-		str++;
-	if (*str == '-' || *str == '+')
+	if (dst == NULL && src == NULL)
+		return (NULL);
+	d = (unsigned char *)dst;
+	s = (unsigned char *)src;
+	if (d > s)
 	{
-		if (*str == '-')
-			neg = -1;
-		str++;
+		while (len--)
+			d[len] = s[len];
 	}
-	while ('0' <= *str && *str <= '9')
+	else
 	{
-		inp *= 10;
-		inp += *str - '0';
-		str++;
+		idx = 0;
+		while (idx < len)
+		{
+			d[idx] = s[idx];
+			idx++;
+		}
 	}
-	return ((int)inp * neg);
+	return (dst);
 }

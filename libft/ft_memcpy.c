@@ -1,37 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kyumkim <kyumkim@student.42.seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/26 12:38:49 by kyumkim           #+#    #+#             */
-/*   Updated: 2023/11/07 15:36:51 by kyumkim          ###   ########.fr       */
+/*   Created: 2023/10/30 00:22:22 by kyumkim           #+#    #+#             */
+/*   Updated: 2023/10/30 00:39:54 by kyumkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_atoi(const char *str)
+void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
-	long long	inp;
-	int			neg;
+	char	*cdst;
+	char	*csrc;
 
-	inp = 0;
-	neg = 1;
-	while ((9 <= *str && *str <= 13) || *str == 32)
-		str++;
-	if (*str == '-' || *str == '+')
+	if (dst == NULL && src == NULL)
+		return (NULL);
+	cdst = (char *)dst;
+	csrc = (char *)src;
+	while (n--)
 	{
-		if (*str == '-')
-			neg = -1;
-		str++;
+		*cdst = *csrc;
+		cdst++;
+		csrc++;
 	}
-	while ('0' <= *str && *str <= '9')
-	{
-		inp *= 10;
-		inp += *str - '0';
-		str++;
-	}
-	return ((int)inp * neg);
+	return (dst);
 }

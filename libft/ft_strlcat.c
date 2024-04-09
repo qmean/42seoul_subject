@@ -1,37 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kyumkim <kyumkim@student.42.seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/26 12:38:49 by kyumkim           #+#    #+#             */
-/*   Updated: 2023/11/07 15:36:51 by kyumkim          ###   ########.fr       */
+/*   Created: 2023/10/30 00:22:24 by kyumkim           #+#    #+#             */
+/*   Updated: 2023/12/07 17:50:55 by kyumkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_atoi(const char *str)
+size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 {
-	long long	inp;
-	int			neg;
+	size_t	srclen;
+	size_t	dstlen;
+	size_t	len;
 
-	inp = 0;
-	neg = 1;
-	while ((9 <= *str && *str <= 13) || *str == 32)
-		str++;
-	if (*str == '-' || *str == '+')
+	srclen = ft_strlen(src);
+	dstlen = ft_strlen(dst);
+	len = 0;
+	while (*dst != 0)
 	{
-		if (*str == '-')
-			neg = -1;
-		str++;
+		len++;
+		dst++;
 	}
-	while ('0' <= *str && *str <= '9')
+	while (len + 1 < dstsize && *src != 0)
 	{
-		inp *= 10;
-		inp += *str - '0';
-		str++;
+		*dst++ = *src++;
+		len++;
 	}
-	return ((int)inp * neg);
+	*dst = 0;
+	if (dstlen < dstsize)
+		return (dstlen + srclen);
+	else
+		return (srclen + dstsize);
 }

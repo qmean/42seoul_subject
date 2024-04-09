@@ -1,37 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   server.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kyumkim <kyumkim@student.42.seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/26 12:38:49 by kyumkim           #+#    #+#             */
-/*   Updated: 2023/11/07 15:36:51 by kyumkim          ###   ########.fr       */
+/*   Created: 2024/04/09 20:54:25 by kyumkim           #+#    #+#             */
+/*   Updated: 2024/04/09 23:38:49 by kyumkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef SERVER_H
+# define SERVER_H
+# include <unistd.h>
+# include <signal.h>
 
-int	ft_atoi(const char *str)
-{
-	long long	inp;
-	int			neg;
-
-	inp = 0;
-	neg = 1;
-	while ((9 <= *str && *str <= 13) || *str == 32)
-		str++;
-	if (*str == '-' || *str == '+')
-	{
-		if (*str == '-')
-			neg = -1;
-		str++;
-	}
-	while ('0' <= *str && *str <= '9')
-	{
-		inp *= 10;
-		inp += *str - '0';
-		str++;
-	}
-	return ((int)inp * neg);
-}
+void	ft_putnbr_fd(int n, int fd);
+void	ft_putstr_fd(char *s, int fd);
+#endif

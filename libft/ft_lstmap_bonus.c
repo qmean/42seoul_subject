@@ -1,37 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_lstmap_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kyumkim <kyumkim@student.42.seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/26 12:38:49 by kyumkim           #+#    #+#             */
-/*   Updated: 2023/11/07 15:36:51 by kyumkim          ###   ########.fr       */
+/*   Created: 2023/10/26 23:31:34 by kyumkim           #+#    #+#             */
+/*   Updated: 2023/10/31 20:36:38 by kyumkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_atoi(const char *str)
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	long long	inp;
-	int			neg;
+	t_list	*ret;
+	t_list	*tmp;
+	void	*inp;
 
-	inp = 0;
-	neg = 1;
-	while ((9 <= *str && *str <= 13) || *str == 32)
-		str++;
-	if (*str == '-' || *str == '+')
+	ret = NULL;
+	while (lst != NULL)
 	{
-		if (*str == '-')
-			neg = -1;
-		str++;
+		inp = f(lst->content);
+		tmp = ft_lstnew(inp);
+		if (tmp == NULL)
+		{
+			free(inp);
+			ft_lstclear(&ret, del);
+			return (NULL);
+		}
+		ft_lstadd_back(&ret, tmp);
+		lst = lst->next;
 	}
-	while ('0' <= *str && *str <= '9')
-	{
-		inp *= 10;
-		inp += *str - '0';
-		str++;
-	}
-	return ((int)inp * neg);
+	tmp = NULL;
+	return (ret);
 }

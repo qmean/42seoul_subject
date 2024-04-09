@@ -1,37 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kyumkim <kyumkim@student.42.seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/26 12:38:49 by kyumkim           #+#    #+#             */
-/*   Updated: 2023/11/07 15:36:51 by kyumkim          ###   ########.fr       */
+/*   Created: 2023/10/26 16:46:39 by kyumkim           #+#    #+#             */
+/*   Updated: 2023/10/26 18:11:49 by kyumkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_atoi(const char *str)
+char	*ft_strjoin(const char *s1, const char *s2)
 {
-	long long	inp;
-	int			neg;
+	char	*ret;
+	int		idx;
 
-	inp = 0;
-	neg = 1;
-	while ((9 <= *str && *str <= 13) || *str == 32)
-		str++;
-	if (*str == '-' || *str == '+')
+	idx = 0;
+	ret = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
+	if (ret == NULL)
+		return (NULL);
+	while (*s1 != 0)
 	{
-		if (*str == '-')
-			neg = -1;
-		str++;
+		ret[idx++] = *s1;
+		s1++;
 	}
-	while ('0' <= *str && *str <= '9')
+	while (*s2 != 0)
 	{
-		inp *= 10;
-		inp += *str - '0';
-		str++;
+		ret[idx++] = *s2;
+		s2++;
 	}
-	return ((int)inp * neg);
+	ret[idx] = 0;
+	return (ret);
 }

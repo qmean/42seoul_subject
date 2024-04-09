@@ -3,23 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyumkim <kyumkim@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: kyumkim <kyumkim@student.42.seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 12:30:50 by kyumkim           #+#    #+#             */
-/*   Updated: 2023/10/25 12:32:40 by kyumkim          ###   ########.fr       */
+/*   Updated: 2023/12/07 15:33:33 by kyumkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char    *ft_strrchr(const char *s, int c)
-{
-    char    *ret;
+#include "libft.h"
 
-    ret  = 0;
-    while (*s != 0)
-    {
-        if (*s == c)
-            ret = s;
-        s++;
-    }
-    return (ret);
+char	*ft_strrchr(const char *s, int c)
+{
+	char	cmp;
+	char	*s1;
+	char	*ret;
+
+	s1 = (char *)s;
+	cmp = (char)c;
+	ret = 0;
+	while (*s1 != 0)
+	{
+		if (*s1 == cmp)
+			ret = s1;
+		s1++;
+	}
+	if (*s1 == cmp)
+		ret = s1;
+	return (ret);
 }

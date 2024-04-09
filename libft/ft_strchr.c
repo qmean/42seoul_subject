@@ -3,18 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyumkim <kyumkim@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: kyumkim <kyumkim@student.42.seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 12:26:06 by kyumkim           #+#    #+#             */
-/*   Updated: 2023/10/25 12:30:17 by kyumkim          ###   ########.fr       */
+/*   Updated: 2023/10/29 17:09:50 by kyumkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char    *ft_strchr(const char *s, int c)
+#include "libft.h"
+
+char	*ft_strchr(const char *s, int c)
 {
-    while (*s != 0 && *s != c)
-        s++;
-    if (*s == c)
-        return (s);
-    return (0);
+	while (*s != 0 && *s != (char)c)
+		s++;
+	if (*s == (char)c)
+		return ((char *)s);
+	return (0);
 }
