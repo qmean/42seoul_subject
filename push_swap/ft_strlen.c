@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kyumkim <kyumkim@student.42.seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/17 00:36:07 by kyumkim           #+#    #+#             */
-/*   Updated: 2024/04/20 22:36:39 by kyumkim          ###   ########.fr       */
+/*   Created: 2023/10/24 21:53:53 by kyumkim           #+#    #+#             */
+/*   Updated: 2023/12/07 14:47:28 by kyumkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-void	print_error(void)
+size_t	ft_strlen(const char *s)
 {
-	write(2, "Error\n", 6);
-	exit(1);
-}
+	size_t	ret;
 
-void	sorted_factor(t_stack_set *set)
-{
-	free_stack(set->stack_a);
-	free_stack(set->stack_b);
-	exit(0);
+	ret = 0;
+	while (*s != 0)
+	{
+		ret++;
+		s++;
+	}
+	return (ret);
 }
