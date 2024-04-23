@@ -6,11 +6,12 @@
 /*   By: kyumkim <kyumkim@student.42.seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 19:40:02 by kyumkim           #+#    #+#             */
-/*   Updated: 2024/04/17 00:02:18 by kyumkim          ###   ########.fr       */
+/*   Updated: 2024/04/23 22:35:34 by kyumkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include "libft.h"
 
 void	rra(t_stack_set *set)
 {
@@ -27,6 +28,7 @@ void	rra(t_stack_set *set)
 	a->first->prev = tmp;
 	a->first = tmp;
 	tmp->prev = NULL;
+	ft_putstr_fd("rra\n", 1);
 }
 
 void	rrb(t_stack_set *set)
@@ -44,10 +46,12 @@ void	rrb(t_stack_set *set)
 	b->first->prev = tmp;
 	b->first = tmp;
 	tmp->prev = NULL;
+	ft_putstr_fd("rrb\n", 1);
 }
 
 void	rrr(t_stack_set *set)
 {
 	rra(set);
 	rrb(set);
+	ft_putstr_fd("rrr\n", 1);
 }

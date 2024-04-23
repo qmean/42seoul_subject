@@ -1,45 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   s_function.c                                       :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kyumkim <kyumkim@student.42.seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/16 18:25:24 by kyumkim           #+#    #+#             */
-/*   Updated: 2024/04/23 22:27:57 by kyumkim          ###   ########.fr       */
+/*   Created: 2023/10/26 21:48:21 by kyumkim           #+#    #+#             */
+/*   Updated: 2023/10/29 12:07:02 by kyumkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
 #include "libft.h"
 
-void	sa(t_stack_set *set)
+void	ft_putstr_fd(char *s, int fd)
 {
-	t_stack		*a;
-
-	a = set->stack_a;
-	if (a->size < 2)
+	if (fd < 0)
 		return ;
-	swap(a->first, a->first->next);
-	ft_putstr_fd("sa\n", 1);
-	return ;
-}
-
-void	sb(t_stack_set *set)
-{
-	t_stack		*b;
-
-	b = set->stack_b;
-	if (b->size < 2)
+	if (s == NULL)
 		return ;
-	swap(b->first, b->first->next);
-	ft_putstr_fd("sb\n", 1);
+	write(fd, s, ft_strlen(s));
 	return ;
-}
-
-void	ss(t_stack_set *set)
-{
-	sa(set);
-	sb(set);
-	ft_putstr_fd("ss\n", 1);
 }

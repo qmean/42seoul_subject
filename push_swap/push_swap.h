@@ -6,7 +6,7 @@
 /*   By: kyumkim <kyumkim@student.42.seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 16:56:52 by kyumkim           #+#    #+#             */
-/*   Updated: 2024/04/20 23:26:15 by kyumkim          ###   ########.fr       */
+/*   Updated: 2024/04/24 01:24:47 by kyumkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ typedef struct s_stack_set
 }t_stack_set;
 
 void	swap(t_node	*a, t_node	*b);
+t_node	*find_node_in_stack(t_stack *stack, int data);
+int		find_index_in_stack(t_stack *stack, int index);
 
 t_node	*new_node(int data);
 void	push_front(t_stack	*stack, t_node *node);
@@ -81,10 +83,15 @@ void	free_string_token(char **string_token);
 void	free_stack(t_stack	*stack);
 void	before_return(char **string_token, int *number_token, t_stack_set *set);
 
-//sort.c
+//sort_initialize.c
+void	sort(int *number_token, int number_size, t_stack_set *set);
 void	sort_number_token(int *number_token, int size);
 void	push_token_to_stack(int *number_token, int size, t_stack_set *set);
-void	sort(int *number_token, int number_size, t_stack_set *set);
 void	stack_init(t_stack_set *set);
+void	make_stack_index(t_stack_set *set, int *number_token, int number_size);
+
+//sort_realsort.c
+void	a_to_b(t_stack_set *set, int chunk);
+void	b_to_a(t_stack_set *set, int num_size);
 
 #endif

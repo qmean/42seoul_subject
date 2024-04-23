@@ -6,7 +6,7 @@
 /*   By: kyumkim <kyumkim@student.42.seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 18:51:48 by kyumkim           #+#    #+#             */
-/*   Updated: 2024/04/17 00:14:52 by kyumkim          ###   ########.fr       */
+/*   Updated: 2024/04/23 21:17:57 by kyumkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	push_front(t_stack	*stack, t_node *data)
 	stack->size = stack->size + 1;
 }
 
-void	push_back(t_stack	*stack, t_node *data)
+void	push_back(t_stack *stack, t_node *data)
 {
 	t_node	*tmp;
 
