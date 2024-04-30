@@ -6,7 +6,7 @@
 /*   By: kyumkim <kyumkim@student.42.seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/20 23:04:24 by kyumkim           #+#    #+#             */
-/*   Updated: 2024/04/24 00:58:04 by kyumkim          ###   ########.fr       */
+/*   Updated: 2024/04/30 15:12:35 by kyumkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,11 @@ void	sort(int *number_token, int number_size, t_stack_set *set)
 	push_token_to_stack(number_token, number_size, set);
 	sort_number_token(number_token, number_size);
 	make_stack_index(set, number_token, number_size);
+	if (number_size <= 5)
+	{
+		sort_small_num(number_size, set);
+		return ;
+	}
 	a_to_b(set, (int)(14.5 + 3 * number_size / 100));
 	b_to_a(set, number_size);
 }

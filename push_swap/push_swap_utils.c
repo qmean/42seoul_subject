@@ -6,7 +6,7 @@
 /*   By: kyumkim <kyumkim@student.42.seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 17:11:27 by kyumkim           #+#    #+#             */
-/*   Updated: 2024/04/24 00:34:14 by kyumkim          ###   ########.fr       */
+/*   Updated: 2024/04/30 11:35:31 by kyumkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,14 @@
 void	swap(t_node	*a, t_node	*b)
 {
 	int		tmp;
+	int		idxtmp;
 
 	tmp = a->data;
+	idxtmp = a->index;
 	a->data = b->data;
+	a->index = b->index;
 	b->data = tmp;
+	b->index = idxtmp;
 }
 
 t_node	*find_node_in_stack(t_stack *stack, int data)

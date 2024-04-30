@@ -6,7 +6,7 @@
 /*   By: kyumkim <kyumkim@student.42.seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 16:56:52 by kyumkim           #+#    #+#             */
-/*   Updated: 2024/04/24 01:24:47 by kyumkim          ###   ########.fr       */
+/*   Updated: 2024/04/30 15:17:42 by kyumkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "stdlib.h"
 # include "unistd.h"
+# include "libft/libft.h"
 
 typedef struct s_node
 {
@@ -68,30 +69,31 @@ void	sorted_factor(t_stack_set *set);
 int		check_sorted(int *number_token, int size);
 void	check_same_num(int	*number_token, int size);
 
-//make_string_token.c
 char	**make_string_token(int argc, char **argv);
 int		token_size(char **token);
 char	**token_push_back(char **dest, char **src);
 
-//make_number_token.c
 int		make_number(char *str);
 int		*make_number_token(char **string_token, int	*number_size);
 
-//free_utils.c
 void	free_tokens(char **string_token, int *number_token);
 void	free_string_token(char **string_token);
 void	free_stack(t_stack	*stack);
 void	before_return(char **string_token, int *number_token, t_stack_set *set);
 
-//sort_initialize.c
 void	sort(int *number_token, int number_size, t_stack_set *set);
 void	sort_number_token(int *number_token, int size);
 void	push_token_to_stack(int *number_token, int size, t_stack_set *set);
 void	stack_init(t_stack_set *set);
 void	make_stack_index(t_stack_set *set, int *number_token, int number_size);
 
-//sort_realsort.c
 void	a_to_b(t_stack_set *set, int chunk);
 void	b_to_a(t_stack_set *set, int num_size);
+
+void	sort_small_num(int number_size, t_stack_set *set);
+void	sort_3num(t_stack_set *set, int rflag);
+void	sort_4num(t_stack_set *set);
+void	sort_5num(t_stack_set *set);
+void	small_num_a_to_b(t_stack_set *set, int idx);
 
 #endif

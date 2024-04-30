@@ -6,12 +6,11 @@
 /*   By: kyumkim <kyumkim@student.42.seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/20 18:53:18 by kyumkim           #+#    #+#             */
-/*   Updated: 2024/04/20 21:47:33 by kyumkim          ###   ########.fr       */
+/*   Updated: 2024/04/30 10:56:33 by kyumkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include "libft.h"
 
 char	**make_string_token(int argc, char **argv)
 {

@@ -6,7 +6,7 @@
 /*   By: kyumkim <kyumkim@student.42.seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/20 20:56:25 by kyumkim           #+#    #+#             */
-/*   Updated: 2024/04/20 21:12:49 by kyumkim          ###   ########.fr       */
+/*   Updated: 2024/04/30 15:16:44 by kyumkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,10 @@ int	*make_number_token(char **string_token, int	*number_size)
 		print_error();
 	while (idx < (*number_size))
 	{
-		ret[idx] = make_number(string_token[idx]);
+		if (ft_strlen(string_token[idx]) > 10)
+			print_error();
+		if (ft_strlen(string_token[idx]) != 0)
+			ret[idx] = make_number(string_token[idx]);
 		idx++;
 	}
 	return (ret);

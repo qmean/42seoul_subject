@@ -6,12 +6,11 @@
 /*   By: kyumkim <kyumkim@student.42.seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 18:25:24 by kyumkim           #+#    #+#             */
-/*   Updated: 2024/04/23 22:27:57 by kyumkim          ###   ########.fr       */
+/*   Updated: 2024/04/30 10:57:01 by kyumkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include "libft.h"
 
 void	sa(t_stack_set *set)
 {
