@@ -6,7 +6,7 @@
 /*   By: kyumkim <kyumkim@student.42.seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 00:54:53 by kyumkim           #+#    #+#             */
-/*   Updated: 2024/04/24 01:24:40 by kyumkim          ###   ########.fr       */
+/*   Updated: 2024/04/30 17:17:10 by kyumkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	main(int argc, char **argv)
 	t_stack_set	*set;
 
 	if (argc < 2)
-		print_error();
+		exit(0);
 	string_token = make_string_token(argc, argv);
 	number_token = make_number_token(string_token, &number_size);
 	check_same_num(number_token, number_size);
