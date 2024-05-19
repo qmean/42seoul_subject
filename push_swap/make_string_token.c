@@ -6,7 +6,7 @@
 /*   By: kyumkim <kyumkim@student.42.seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/20 18:53:18 by kyumkim           #+#    #+#             */
-/*   Updated: 2024/04/30 10:56:33 by kyumkim          ###   ########.fr       */
+/*   Updated: 2024/05/18 00:44:01 by kyumkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,19 @@ char	**make_string_token(int argc, char **argv)
 {
 	int		idx;
 	char	**string_token;
+	char	**tmp;
 
 	idx = 1;
 	string_token = ft_split(argv[idx], ' ');
+	if (token_size(string_token) == 0 && ft_strlen(argv[idx]) > 0)
+		print_error();
 	idx++;
 	while (idx < argc)
 	{
-		string_token = token_push_back(string_token, ft_split(argv[idx], ' '));
+		tmp = ft_split(argv[idx], ' ');
+		if (token_size(tmp) == 0 && ft_strlen(argv[idx]) > 0)
+			print_error();
+		string_token = token_push_back(string_token, tmp);
 		idx++;
 	}
 	return (string_token);
