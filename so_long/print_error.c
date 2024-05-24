@@ -1,29 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.c                                          :+:      :+:    :+:   */
+/*   print_error.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kyumkim <kyumkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/19 17:23:59 by kyumkim           #+#    #+#             */
-/*   Updated: 2024/05/24 20:55:53 by kyumkim          ###   ########.fr       */
+/*   Created: 2024/05/24 18:08:46 by kyumkim           #+#    #+#             */
+/*   Updated: 2024/05/24 19:13:15 by kyumkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	leaks(void)
+void	map_error(void)
 {
-	system("leaks a.out");
+	perror("map error\n");
+	exit(1);
 }
 
-int	main(int argc, char **argv)
+void	memory_error(void)
 {
-	game_t	*game;
+	perror("malloc error\n");
+	exit(1);
+}
 
-	atexit(leaks);
-	if (argc < 2)
-		return (1);
-	game = init_game(argv[1]);
-	mlx_loop(game->mlx_ptr);
+void	image_error(void)
+{
+	perror("image error\n");
+	exit(1);
+}
+
+void	open_error(void)
+{
+	perror("file open error\n");
+	exit(1);
 }

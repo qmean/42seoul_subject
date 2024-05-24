@@ -1,29 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.c                                          :+:      :+:    :+:   */
+/*   map_size_checker.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kyumkim <kyumkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/19 17:23:59 by kyumkim           #+#    #+#             */
-/*   Updated: 2024/05/24 20:55:53 by kyumkim          ###   ########.fr       */
+/*   Created: 2024/05/24 19:17:32 by kyumkim           #+#    #+#             */
+/*   Updated: 2024/05/24 19:21:52 by kyumkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	leaks(void)
+int map_height(char **map)
 {
-	system("leaks a.out");
+	int		ret;
+	
+	ret = 0;
+	while (map[ret] != NULL)
+	{
+		ret++;
+	}
+	return (ret);
 }
 
-int	main(int argc, char **argv)
+int map_width(char *str)
 {
-	game_t	*game;
+	int ret;
 
-	atexit(leaks);
-	if (argc < 2)
-		return (1);
-	game = init_game(argv[1]);
-	mlx_loop(game->mlx_ptr);
+	ret = 0;
+	while(str[ret] != '\0' && str[ret] != '\n')
+	{
+		ret++;
+	}
+	return (ret);
 }
