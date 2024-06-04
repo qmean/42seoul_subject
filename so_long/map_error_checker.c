@@ -6,7 +6,7 @@
 /*   By: kyumkim <kyumkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 18:52:02 by kyumkim           #+#    #+#             */
-/*   Updated: 2024/05/31 15:59:08 by kyumkim          ###   ########.fr       */
+/*   Updated: 2024/06/04 18:18:17 by kyumkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	map_check(char **map)
 	invalid_character_check(map);
 	one_player_check(map);
 	one_exit_check(map);
+	no_door_check(map);
 	check_top_bottom_boundaries(map);
 	check_left_right_boundaries(map);
 	check_no_item(map);
@@ -65,5 +66,27 @@ void	invalid_character_check(char **map)
 			idx2++;
 		}
 		idx++;
+	}
+}
+
+void	check_top_bottom_boundaries(char **map)
+{
+	int	row;
+	int	col;
+
+	row = 0;
+	col = 0;
+	while (map[row] != NULL)
+	{
+		if (map[row][col] != '1')
+			map_error();
+		row++;
+	}
+	row--;
+	while (map[row][col] != '\0')
+	{
+		if (map[row][col] != '1')
+			map_error();
+		col++;
 	}
 }

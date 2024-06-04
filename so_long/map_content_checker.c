@@ -6,7 +6,7 @@
 /*   By: kyumkim <kyumkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 14:38:22 by kyumkim           #+#    #+#             */
-/*   Updated: 2024/05/31 16:00:02 by kyumkim          ###   ########.fr       */
+/*   Updated: 2024/06/04 18:34:43 by kyumkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,26 @@ void	one_player_check(char **map)
 		map_error();
 }
 
+void	no_door_check(char **map)
+{
+	int	idx;
+	int	idx2;
+
+	idx = 0;
+	while (map[idx] != NULL)
+	{
+		idx2 = 0;
+		while (map[idx][idx2] != '\0')
+		{
+			if (map[idx][idx2] == 'D')
+				map_error();
+			idx2++;
+		}
+		idx++;
+	}
+	return ;
+}
+
 void	one_exit_check(char **map)
 {
 	int	exit_count;
@@ -64,28 +84,6 @@ void	one_exit_check(char **map)
 	}
 	if (exit_count == 0)
 		map_error();
-}
-
-void	check_top_bottom_boundaries(char **map)
-{
-	int	row;
-	int	col;
-
-	row = 0;
-	col = 0;
-	while (map[row] != NULL)
-	{
-		if (map[row][col] != '1')
-			map_error();
-		row++;
-	}
-	row--;
-	while (map[row][col] != '\0')
-	{
-		if (map[row][col] != '1')
-			map_error();
-		col++;
-	}
 }
 
 void	check_left_right_boundaries(char **map)

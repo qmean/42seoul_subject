@@ -6,13 +6,13 @@
 /*   By: kyumkim <kyumkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 16:41:29 by kyumkim           #+#    #+#             */
-/*   Updated: 2024/05/31 19:32:04 by kyumkim          ###   ########.fr       */
+/*   Updated: 2024/06/04 18:18:32 by kyumkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	find_player(game_t *game)
+void	find_player(t_game *game)
 {
 	int		idx;
 	int		jdx;
@@ -36,7 +36,7 @@ void	find_player(game_t *game)
 	map_error();
 }
 
-void	update_coin_num(game_t *game)
+void	update_coin_num(t_game *game)
 {
 	int		idx;
 	int		jdx;
@@ -56,7 +56,7 @@ void	update_coin_num(game_t *game)
 	}
 }
 
-void	update_exit(game_t *game)
+void	update_exit(t_game *game)
 {
 	int		idx;
 	int		jdx;

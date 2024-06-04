@@ -6,13 +6,13 @@
 /*   By: kyumkim <kyumkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 18:58:08 by kyumkim           #+#    #+#             */
-/*   Updated: 2024/05/31 20:50:24 by kyumkim          ###   ########.fr       */
+/*   Updated: 2024/06/04 16:55:50 by kyumkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	exit_game(game_t *game)
+int	exit_game(t_game *game)
 {
 	mlx_destroy_image(game->mlx_ptr, game->img.wall);
 	mlx_destroy_image(game->mlx_ptr, game->img.empty);
@@ -25,7 +25,7 @@ int	exit_game(game_t *game)
 	exit(0);
 }
 
-void	free_game(game_t *game)
+void	free_game(t_game *game)
 {
 	int	idx;
 

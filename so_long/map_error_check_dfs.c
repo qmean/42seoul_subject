@@ -6,13 +6,13 @@
 /*   By: kyumkim <kyumkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 17:26:46 by kyumkim           #+#    #+#             */
-/*   Updated: 2024/05/31 20:29:55 by kyumkim          ###   ########.fr       */
+/*   Updated: 2024/06/04 16:55:50 by kyumkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	is_valid_position(game_t *game, int x, int y)
+int	is_valid_position(t_game *game, int x, int y)
 {
 	if (x >= 0 && x < game->width && y >= 0 && y < game->height)
 	{
@@ -22,7 +22,7 @@ int	is_valid_position(game_t *game, int x, int y)
 	return (0);
 }
 
-void	dfs(game_t *game, int x, int y, int **visited)
+void	dfs(t_game *game, int x, int y, int **visited)
 {
 	if (!is_valid_position(game, x, y) || visited[y][x])
 		return ;
@@ -37,7 +37,7 @@ void	dfs(game_t *game, int x, int y, int **visited)
 	dfs(game, x, y - 1, visited);
 }
 
-void	check_valid_path(game_t *game)
+void	check_valid_path(t_game *game)
 {
 	int	**visited;
 	int	i;
@@ -58,7 +58,7 @@ void	check_valid_path(game_t *game)
 	game->exit = 1;
 }
 
-int	**make_visited(game_t *game)
+int	**make_visited(t_game *game)
 {
 	int	**visited;
 	int	i;

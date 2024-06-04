@@ -6,7 +6,7 @@
 /*   By: kyumkim <kyumkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 17:26:28 by kyumkim           #+#    #+#             */
-/*   Updated: 2024/05/31 19:59:47 by kyumkim          ###   ########.fr       */
+/*   Updated: 2024/06/04 18:43:34 by kyumkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,24 +34,25 @@
 # define RIGHT 2
 # define ESC 53
 
-struct image_s
+typedef struct s_image
 {
 	void	*wall;
 	void	*empty;
 	void	*item;
 	void	*exit;
 	void	*player;
+	void	*door;
 	int		width;
 	int		hieght;
-}typedef	image_t;
+}	t_image;
 
-struct game_s
+typedef struct s_game
 {
 	int		height;
 	int		width;
 	void	*mlx_ptr;
 	void	*window_ptr;
-	image_t	img;
+	t_image	img;
 	char	**map;
 	int		player_x;
 	int		player_y;
@@ -60,7 +61,8 @@ struct game_s
 	int		coins;
 	int		exit;
 	int		moves;
-}typedef	game_t;
+	int		player_on_exit;
+}	t_game;
 
 void	map_error(void);
 void	memory_error(void);
@@ -69,16 +71,18 @@ void	open_error(void);
 void	file_error(void);
 
 // game_initialize
-game_t	*init_game(char *input);
+t_game	*init_game(char *input);
 int		check_map_name_and_open(char *file);
+int		ft_strcmp(char *str1, char *str2);
+void	ft_putnbr(int num);
 
 // image_initialize
-void	init_image(game_t *game);
-void	img_check(game_t *game);
+void	init_image(t_game *game);
+void	img_check(t_game *game);
 
 // map_initialize
-void	map_initialize(game_t *game, int fd);
-void	put_map(game_t *game, char *line);
+void	map_initialize(t_game *game, int fd);
+void	put_map(t_game *game, char *line);
 char	*copy_line(char	*line);
 
 // map_size_checker.c
@@ -90,12 +94,13 @@ void	map_check(char **map);
 void	check_empty_map(char **map);
 void	square_check(char **map);
 void	invalid_character_check(char **map);
+void	no_door_check(char **map);
 
 // map_error_checker_dfs.c
-void	check_valid_path(game_t *game);
-void	dfs(game_t *game, int x, int y, int **visited);
-int		is_valid_position(game_t *game, int x, int y);
-int		**make_visited(game_t *game);
+void	check_valid_path(t_game *game);
+void	dfs(t_game *game, int x, int y, int **visited);
+int		is_valid_position(t_game *game, int x, int y);
+int		**make_visited(t_game *game);
 
 // map_content_checker.c
 void	one_player_check(char **map);
@@ -105,20 +110,20 @@ void	check_left_right_boundaries(char **map);
 void	check_no_item(char **map);
 
 // window_initialize.c
-void	window_initialize(game_t *game);
-void	put_in_map(char	*line, game_t *game, int height);
+void	window_initialize(t_game *game);
+void	put_in_map(char	*line, t_game *game, int height);
 
 // find_player.c
-void	find_player(game_t *game);
-void	update_coin_num(game_t *game);
-void	update_exit(game_t *game);
+void	find_player(t_game *game);
+void	update_coin_num(t_game *game);
+void	update_exit(t_game *game);
 
 // exit_game.c
-int		exit_game(game_t *game);
-void	free_game(game_t *game);
+int		exit_game(t_game *game);
+void	free_game(t_game *game);
 
 // move.c
-int		move(int key, game_t *game);
-void	move_control(game_t *game, int x, int y);
+int		move(int key, t_game *game);
+void	move_control(t_game *game, int x, int y);
 
 #endif

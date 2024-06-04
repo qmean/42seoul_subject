@@ -6,13 +6,13 @@
 /*   By: kyumkim <kyumkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 19:11:20 by kyumkim           #+#    #+#             */
-/*   Updated: 2024/05/31 18:02:17 by kyumkim          ###   ########.fr       */
+/*   Updated: 2024/06/04 16:55:50 by kyumkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	map_initialize(game_t *game, int fd)
+void	map_initialize(t_game *game, int fd)
 {
 	char	*line;
 
@@ -31,7 +31,7 @@ void	map_initialize(game_t *game, int fd)
 	check_valid_path(game);
 }
 
-void	put_map(game_t *game, char *line)
+void	put_map(t_game *game, char *line)
 {
 	char	**tmp;
 	int		idx;
