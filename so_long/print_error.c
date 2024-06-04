@@ -6,7 +6,7 @@
 /*   By: kyumkim <kyumkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 18:08:46 by kyumkim           #+#    #+#             */
-/*   Updated: 2024/05/31 15:58:17 by kyumkim          ###   ########.fr       */
+/*   Updated: 2024/06/04 19:56:27 by kyumkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,36 @@
 
 void	map_error(void)
 {
-	perror("map error");
+	write(2, "Error\n", 6);
+	write(2, "map error\n", 10);
 	exit(1);
 }
 
 void	memory_error(void)
 {
-	perror("malloc error");
+	write(2, "Error\n", 6);
+	write(2, "malloc error\n", 13);
 	exit(1);
 }
 
 void	image_error(void)
 {
+	write(2, "Error\n", 6);
+	write(2, "image error\n", 12);
 	perror("image error");
 	exit(1);
 }
 
 void	open_error(void)
 {
-	perror("file open error");
+	write(2, "Error\n", 6);
+	write(2, "file open error\n", 16);
 	exit(1);
 }
 
 void	file_error(void)
 {
-	perror("file error");
+	write(2, "Error\n", 6);
+	write(2, "file error\n", 11);
 	exit(1);
 }
