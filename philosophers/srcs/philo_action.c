@@ -6,7 +6,7 @@
 /*   By: kyumkim <kyumkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 02:34:43 by kyumkim           #+#    #+#             */
-/*   Updated: 2024/06/22 02:36:51 by kyumkim          ###   ########.fr       */
+/*   Updated: 2024/06/23 20:55:54 by kyumkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,23 @@ void	philo_eat(t_philo *philo)
 	philo_print(philo, "has taken a fork");
 	pthread_mutex_lock(&philo->args->fork[philo->right]);
 	philo_print(philo, "has taken a fork");
+	pthread_mutex_lock(&philo->last_eat_mutex);
+	pthread_mutex_lock(&philo->eat_count_mutex);
 	philo_print(philo, "is eating");
 	philo->last_eat = get_time();
 	usleep(philo->args->time_to_eat * 1000);
-	pthread_mutex_unlock(&philo->args->fork[philo->left]);
-	pthread_mutex_unlock(&philo->args->fork[philo->right]);
 	philo->eat_count++;
+	pthread_mutex_lock(&philo->args->end_philo_mutex);
+	if (philo->eat_count == philo->args->num_of_must_eat)
+	{
+		philo->args->end_philo++;
+		philo->finished = 1;
+	}
+	pthread_mutex_unlock(&philo->args->end_philo_mutex);
+	pthread_mutex_unlock(&philo->last_eat_mutex);
+	pthread_mutex_unlock(&philo->eat_count_mutex);
+	pthread_mutex_unlock(&philo->args->fork[philo->right]);
+	pthread_mutex_unlock(&philo->args->fork[philo->left]);
 }
 
 void	philo_sleep(t_philo *philo)

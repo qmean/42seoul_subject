@@ -6,30 +6,31 @@
 /*   By: kyumkim <kyumkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 23:02:51 by kyumkim           #+#    #+#             */
-/*   Updated: 2024/06/22 03:11:01 by kyumkim          ###   ########.fr       */
+/*   Updated: 2024/06/23 21:21:43 by kyumkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int main(int argc, char **argv) {
-	t_args args;
-	t_philo *philo;
+int	main(int argc, char **argv)
+{
+	t_args	args;
+	t_philo	*philo;
 
-	if (argc != 5 && argc != 6) {
+	if (argc != 5 && argc != 6)
+	{
 		print_error("Error: Invalid arguments\n");
 	}
 	init_args(&args, argc, argv);
 	init_mutex(&args);
 	init_philo(&args, &philo);
 	start_philo(&args, philo);
+	free_philo(&args, philo);
 }
 
-void check_finished(t_args *args, t_philo *philo);
-
-void start_philo(t_args *args, t_philo *philo)
+void	start_philo(t_args *args, t_philo *philo)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	args->start_time = get_time();
@@ -39,7 +40,7 @@ void start_philo(t_args *args, t_philo *philo)
 			print_error("Error: Failed to create thread\n");
 		i++;
 	}
-	check_finished(args, philo);
+	check_finished(args, philo, 0);
 	i = 0;
 	while (i < args->num_of_philo)
 	{
@@ -49,65 +50,72 @@ void start_philo(t_args *args, t_philo *philo)
 	}
 }
 
-void check_finished(t_args *args, t_philo *philo)
+void	check_finished(t_args *args, t_philo *philo, int i)
 {
-	int	i;
-
-	while (!args->finished) {
-		if ((args->num_of_must_eat != 0) && (args->num_of_philo >= args->end_philo)) {
+	while (!args->finished)
+	{
+		if ((args->num_of_must_eat != 0)
+			&& (args->num_of_philo == args->end_philo))
+		{
 			args->finished = 1;
-			break;
+			checker_print(args, "All philosophers have eaten enough");
+			break ;
 		}
-		i = 0;
-		while (i < args->num_of_philo) {
-			if (get_time() - philo[i].last_eat > args->time_to_die * 1000) {
+		while (i < args->num_of_philo)
+		{
+			pthread_mutex_lock(&philo[i].last_eat_mutex);
+			if (get_time() - philo[i].last_eat > args->time_to_die)
+			{
+				pthread_mutex_lock(&args->finished_mutex);
+				checker_print(args, "A philosopher died");
 				args->finished = 1;
-				break;
+				pthread_mutex_unlock(&args->finished_mutex);
+				pthread_mutex_unlock(&philo[i].last_eat_mutex);
+				break ;
 			}
+			pthread_mutex_unlock(&philo[i].last_eat_mutex);
 			i++;
 		}
 	}
 }
 
-void *routine(void *philo)
+void	*routine(void *philo)
 {
-	t_philo *args;
+	t_philo	*cur_philo;
 
-	args = (t_philo *)philo;
-	while(!args->args->finished)
+	cur_philo = (t_philo *)philo;
+	while (1)
 	{
-		philo_eat(args);
-		philo_sleep(args);
-		philo_think(args);
+		if (check_finished_routine(cur_philo))
+			break ;
+		if (cur_philo->id % 2 == 0)
+			usleep(100);
+		if (check_finished_routine(cur_philo))
+			break ;
+		else
+			philo_think(cur_philo);
+		if (check_finished_routine(cur_philo))
+			break ;
+		else
+			philo_eat(cur_philo);
+		if (cur_philo->finished)
+			break ;
+		if (check_finished_routine(cur_philo))
+			break ;
+		else
+			philo_sleep(cur_philo);
 	}
 	return (0);
 }
 
-void	philo_print(t_philo *args, char *msg)
+int	check_finished_routine(t_philo *philo)
 {
-	long long	time;
-
-	time = get_time() - args->args->start_time;
-	pthread_mutex_lock(&args->args->print);
-	printf("%lld %d %s\n", time, args->id + 1, msg);
-	pthread_mutex_unlock(&args->args->print);
-}
-
-void print_error(char *msg) {
-	ft_putstr_fd(msg, 2);
-	exit(1);
-}
-
-long long	get_time()
-{
-	struct timeval time;
-	long long		ret;
-
-	gettimeofday(&time, NULL);
-	if (time.tv_sec < 0)
-		print_error("Error: Failed to get time\n");
-	if (time.tv_usec < 0)
-		print_error("Error: Failed to get time\n");
-	ret = (long long)time.tv_sec * 1000 + (time.tv_usec / 1000);
-	return (ret);
+	pthread_mutex_lock(&philo->args->finished_mutex);
+	if (philo->args->finished)
+	{
+		pthread_mutex_unlock(&philo->args->finished_mutex);
+		return (1);
+	}
+	pthread_mutex_unlock(&philo->args->finished_mutex);
+	return (0);
 }

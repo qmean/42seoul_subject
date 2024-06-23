@@ -6,13 +6,13 @@
 /*   By: kyumkim <kyumkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 01:14:24 by kyumkim           #+#    #+#             */
-/*   Updated: 2024/06/22 02:53:44 by kyumkim          ###   ########.fr       */
+/*   Updated: 2024/06/23 20:55:27 by kyumkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void init_philo(t_args *args, t_philo **philo)
+void	init_philo(t_args *args, t_philo **philo)
 {
 	int	i;
 
@@ -28,11 +28,15 @@ void init_philo(t_args *args, t_philo **philo)
 		(*philo)[i].eat_count = 0;
 		(*philo)[i].last_eat = get_time();
 		(*philo)[i].args = args;
+		if (pthread_mutex_init(&(*philo)[i].eat_count_mutex, NULL) != 0)
+			print_error("Error: Failed to initialize mutex\n");
+		if (pthread_mutex_init(&(*philo)[i].last_eat_mutex, NULL) != 0)
+			print_error("Error: Failed to initialize mutex\n");
 		i++;
 	}
 }
 
-void init_mutex(t_args *args)
+void	init_mutex(t_args *args)
 {
 	int	i;
 
@@ -46,9 +50,13 @@ void init_mutex(t_args *args)
 			print_error("Error: Failed to initialize mutex\n");
 		i++;
 	}
+	if (pthread_mutex_init(&args->print, NULL) != 0)
+		print_error("Error: Failed to initialize mutex\n");
+	if (pthread_mutex_init(&args->finished_mutex, NULL) != 0)
+		print_error("Error: Failed to initialize mutex\n");
 }
 
-void init_args(t_args *data, int argc, char **argv)
+void	init_args(t_args *data, int argc, char **argv)
 {
 	data->num_of_philo = ft_atoi(argv[1]);
 	if (data->num_of_philo < 0)
@@ -66,7 +74,8 @@ void init_args(t_args *data, int argc, char **argv)
 	{
 		data->num_of_must_eat = ft_atoi(argv[5]);
 		if (data->num_of_must_eat < 0)
-			print_error("Error: Invalid number of times each philosopher must eat\n");
+			print_error
+				("Error: Invalid number of times each philosopher must eat\n");
 	}
 	else
 		data->num_of_must_eat = 0;
