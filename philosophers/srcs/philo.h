@@ -6,7 +6,7 @@
 /*   By: kyumkim <kyumkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 23:07:06 by kyumkim           #+#    #+#             */
-/*   Updated: 2024/06/23 21:19:43 by kyumkim          ###   ########.fr       */
+/*   Updated: 2024/06/26 20:45:36 by kyumkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct s_args
 	pthread_mutex_t	print;
 	pthread_mutex_t	finished_mutex;
 	pthread_mutex_t	end_philo_mutex;
+	pthread_mutex_t start_mutex;
 	int				end_philo;
 }					t_args;
 
@@ -63,7 +64,7 @@ void		philo_sleep(t_philo *philo);
 void		philo_think(t_philo *philo);
 int			check_finished_routine(t_philo *philo);
 void		check_finished(t_args *args, t_philo *philo, int i);
-void		checker_print(t_args *args, char *msg);
+void		checker_print(t_args *args, int philo_num, char *msg);
 void		free_philo(t_args *args, t_philo *philo);
 
 #endif

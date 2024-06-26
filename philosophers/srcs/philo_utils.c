@@ -6,7 +6,7 @@
 /*   By: kyumkim <kyumkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 21:14:52 by kyumkim           #+#    #+#             */
-/*   Updated: 2024/06/23 21:21:27 by kyumkim          ###   ########.fr       */
+/*   Updated: 2024/06/26 21:05:29 by kyumkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,20 +24,20 @@ void	philo_print(t_philo *args, char *msg)
 	pthread_mutex_unlock(&args->args->print);
 }
 
-void	checker_print(t_args *args, char *msg)
+void	checker_print(t_args *args, int philo_num, char *msg)
 {
 	long long	time;
 
 	pthread_mutex_lock(&args->print);
 	time = get_time() - args->start_time;
-	printf("%lld %s\n", time, msg);
+	printf("%lld %d %s\n", time, philo_num + 1, msg);
 	pthread_mutex_unlock(&args->print);
 }
 
 void	print_error(char *msg)
 {
 	ft_putstr_fd(msg, 2);
-	exit(1);
+	return ;
 }
 
 long long	get_time(void)
@@ -80,5 +80,7 @@ void	free_philo(t_args *args, t_philo *philo)
 	if (pthread_mutex_destroy(&args->finished_mutex))
 		print_error("Error: Failed to destroy mutex\n");
 	if (pthread_mutex_destroy(&args->end_philo_mutex))
+		print_error("Error: Failed to destroy mutex\n");
+	if (pthread_mutex_destroy(&args->start_mutex))
 		print_error("Error: Failed to destroy mutex\n");
 }

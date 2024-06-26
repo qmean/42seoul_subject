@@ -6,7 +6,7 @@
 /*   By: kyumkim <kyumkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 01:14:24 by kyumkim           #+#    #+#             */
-/*   Updated: 2024/06/23 20:55:27 by kyumkim          ###   ########.fr       */
+/*   Updated: 2024/06/26 20:49:48 by kyumkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,10 @@ void	init_mutex(t_args *args)
 	if (pthread_mutex_init(&args->print, NULL) != 0)
 		print_error("Error: Failed to initialize mutex\n");
 	if (pthread_mutex_init(&args->finished_mutex, NULL) != 0)
+		print_error("Error: Failed to initialize mutex\n");
+	if (pthread_mutex_init(&args->end_philo_mutex, NULL) != 0)
+		print_error("Error: Failed to initialize mutex\n");
+	if (pthread_mutex_init(&args->start_mutex, NULL) != 0)
 		print_error("Error: Failed to initialize mutex\n");
 }
 
