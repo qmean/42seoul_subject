@@ -6,7 +6,7 @@
 /*   By: kyumkim <kyumkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 13:25:52 by kyumkim           #+#    #+#             */
-/*   Updated: 2024/06/04 18:21:59 by kyumkim          ###   ########.fr       */
+/*   Updated: 2024/06/04 20:09:31 by kyumkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ int	check_map_name_and_open(char *file)
 
 	len = ft_strlen(file);
 	if (len < 4 || ft_strcmp(file + len - 4, ".ber") != 0)
+		file_error();
+	if (ft_strcmp(file, ".ber") == 0)
 		file_error();
 	ret = open(file, O_RDONLY);
 	if (ret == -1)

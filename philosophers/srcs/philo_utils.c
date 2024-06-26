@@ -3,41 +3,46 @@
 /*                                                        :::      ::::::::   */
 /*   philo_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyumkim <kyumkim@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: kyumkim <kyumkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 21:14:52 by kyumkim           #+#    #+#             */
-/*   Updated: 2024/06/26 21:05:29 by kyumkim          ###   ########.fr       */
+/*   Updated: 2024/06/27 01:27:36 by kyumkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	philo_print(t_philo *args, char *msg)
+void	philo_print(t_philo *philo, char *msg)
 {
 	long long	time;
 
-	if (check_finished_routine(args))
+	pthread_mutex_lock(&philo->args->finished_mutex);
+	if (philo->args->finished)
+	{
+		pthread_mutex_unlock(&philo->args->finished_mutex);
 		return ;
-	pthread_mutex_lock(&args->args->print);
-	time = get_time() - args->args->start_time;
-	printf("%lld %d %s\n", time, args->id + 1, msg);
-	pthread_mutex_unlock(&args->args->print);
+	}
+	time = get_time() - philo->args->start_time;
+	pthread_mutex_lock(&philo->args->print);
+	printf("%lld %d %s\n", time, philo->id + 1, msg);
+	pthread_mutex_unlock(&philo->args->print);
+	pthread_mutex_unlock(&philo->args->finished_mutex);
 }
 
 void	checker_print(t_args *args, int philo_num, char *msg)
 {
 	long long	time;
 
-	pthread_mutex_lock(&args->print);
 	time = get_time() - args->start_time;
+	pthread_mutex_lock(&args->print);
 	printf("%lld %d %s\n", time, philo_num + 1, msg);
 	pthread_mutex_unlock(&args->print);
 }
 
-void	print_error(char *msg)
+int	print_error(char *msg)
 {
 	ft_putstr_fd(msg, 2);
-	return ;
+	return (1);
 }
 
 long long	get_time(void)
@@ -46,41 +51,35 @@ long long	get_time(void)
 	long long		ret;
 
 	gettimeofday(&time, NULL);
-	if (time.tv_sec < 0)
-		print_error("Error: Failed to get time\n");
-	if (time.tv_usec < 0)
-		print_error("Error: Failed to get time\n");
 	ret = (long long)time.tv_sec * 1000 + (time.tv_usec / 1000);
 	return (ret);
 }
 
-void	free_philo(t_args *args, t_philo *philo)
+int	free_philo(t_args *args, t_philo *philo, int i)
 {
-	int	i;
-
-	i = 0;
 	while (i < args->num_of_philo)
 	{
 		if (pthread_mutex_destroy(&philo[i].eat_count_mutex))
-			print_error("Error: Failed to destroy mutex\n");
+			return (1);
 		if (pthread_mutex_destroy(&philo[i].last_eat_mutex))
-			print_error("Error: Failed to destroy mutex\n");
+			return (1);
 		i++;
 	}
 	free(philo);
 	i = 0;
 	while (i < args->num_of_philo)
 	{
-		if (pthread_mutex_destroy(&args->fork[i]))
-			print_error("Error: Failed to destroy mutex\n");
-		i++;
+		if (pthread_mutex_destroy(&args->fork[i++]))
+			return (1);
 	}
+	free(args->fork);
 	if (pthread_mutex_destroy(&args->print))
-		print_error("Error: Failed to destroy mutex\n");
+		return (1);
 	if (pthread_mutex_destroy(&args->finished_mutex))
-		print_error("Error: Failed to destroy mutex\n");
+		return (1);
 	if (pthread_mutex_destroy(&args->end_philo_mutex))
-		print_error("Error: Failed to destroy mutex\n");
+		return (1);
 	if (pthread_mutex_destroy(&args->start_mutex))
-		print_error("Error: Failed to destroy mutex\n");
+		return (1);
+	return (0);
 }

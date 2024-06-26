@@ -1,26 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.c                                          :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kyumkim <kyumkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/19 17:23:59 by kyumkim           #+#    #+#             */
-/*   Updated: 2024/06/15 17:50:54 by kyumkim          ###   ########.fr       */
+/*   Created: 2023/10/26 12:38:49 by kyumkim           #+#    #+#             */
+/*   Updated: 2024/06/26 21:57:16 by kyumkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "philo.h"
 
-int	main(int argc, char **argv)
+int	ft_atoi(const char *str)
 {
-	t_game	*game;
+	long long	inp;
 
-	if (argc != 2)
-		return (1);
-	game = init_game(argv[1]);
-	game->player_on_exit = 0;
-	mlx_key_hook(game->window_ptr, move, game);
-	mlx_hook(game->window_ptr, 17, 0, exit_game, game);
-	mlx_loop(game->mlx_ptr);
+	inp = 0;
+	if (*str == '-' || *str == '+')
+	{
+		if (*str == '-')
+			return (-1);
+		str++;
+	}
+	while ('0' <= *str && *str <= '9')
+	{
+		inp *= 10;
+		inp += *str - '0';
+		str++;
+		if (inp > 2147483647)
+			return (-1);
+	}
+	return (inp);
 }

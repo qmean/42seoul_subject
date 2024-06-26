@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyumkim <kyumkim@student.42.seoul.kr>      +#+  +:+       +#+        */
+/*   By: kyumkim <kyumkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 21:48:21 by kyumkim           #+#    #+#             */
-/*   Updated: 2023/10/29 12:07:02 by kyumkim          ###   ########.fr       */
+/*   Updated: 2024/06/26 21:30:18 by kyumkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "philo.h"
 
 void	ft_putstr_fd(char *s, int fd)
 {
