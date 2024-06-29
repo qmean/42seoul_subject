@@ -6,7 +6,7 @@
 /*   By: kyuminkim <kyuminkim@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 02:34:43 by kyumkim           #+#    #+#             */
-/*   Updated: 2024/06/29 14:01:44 by kyuminkim        ###   ########.fr       */
+/*   Updated: 2024/06/29 20:31:11 by kyuminkim        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	*routine(void *philo)
 			philo_think(cur_philo);
 		else
 			break ;
+		usleep(10);
 	}
 	return (0);
 }

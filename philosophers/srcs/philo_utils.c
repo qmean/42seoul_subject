@@ -6,7 +6,7 @@
 /*   By: kyuminkim <kyuminkim@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 21:14:52 by kyumkim           #+#    #+#             */
-/*   Updated: 2024/06/29 13:53:51 by kyuminkim        ###   ########.fr       */
+/*   Updated: 2024/06/29 20:20:46 by kyuminkim        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ void	checker_print(t_args *args, int philo_num, char *msg)
 {
 	long long	time;
 
-	time = get_time() - args->start_time;
 	pthread_mutex_lock(&args->print);
+	time = get_time() - args->start_time;
 	printf("%lld %d %s\n", time, philo_num + 1, msg);
 	pthread_mutex_unlock(&args->print);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyumkim <kyumkim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: kyuminkim <kyuminkim@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 12:38:49 by kyumkim           #+#    #+#             */
-/*   Updated: 2024/06/26 21:57:16 by kyumkim          ###   ########.fr       */
+/*   Updated: 2024/06/29 19:59:00 by kyuminkim        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_atoi(const char *str)
 	long long	inp;
 
 	inp = 0;
-	if (*str == '-' || *str == '+')
+	if (*str == '-' || *str == '+' || *str == '\0')
 	{
 		if (*str == '-')
 			return (-1);
