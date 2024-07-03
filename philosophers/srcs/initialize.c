@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyumkim <kyumkim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: kyuminkim <kyuminkim@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 01:14:24 by kyumkim           #+#    #+#             */
-/*   Updated: 2024/06/27 01:25:22 by kyumkim          ###   ########.fr       */
+/*   Updated: 2024/07/03 14:08:09 by kyuminkim        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ int	init_philo(t_args *args, t_philo **philo)
 		(*philo)[i].right = (i + 1) % args->num_of_philo;
 		(*philo)[i].eat_count = 0;
 		(*philo)[i].last_eat = get_time();
-		if (pthread_mutex_init(&(*philo)[i].eat_count_mutex, NULL) != 0)
-			return (-1);
 		if (pthread_mutex_init(&(*philo)[i].last_eat_mutex, NULL) != 0)
 			return (-1);
 		(*philo)[i].args = args;

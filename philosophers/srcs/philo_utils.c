@@ -6,7 +6,7 @@
 /*   By: kyuminkim <kyuminkim@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 21:14:52 by kyumkim           #+#    #+#             */
-/*   Updated: 2024/06/29 20:20:46 by kyuminkim        ###   ########.fr       */
+/*   Updated: 2024/07/03 14:27:04 by kyuminkim        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void	philo_print(t_philo *philo, char *msg)
 		pthread_mutex_unlock(&philo->args->finished_mutex);
 		return ;
 	}
-	time = get_time() - philo->args->start_time;
 	pthread_mutex_lock(&philo->args->print);
+	time = get_time() - philo->args->start_time;
 	printf("%lld %d %s\n", time, philo->id + 1, msg);
 	pthread_mutex_unlock(&philo->args->print);
 	pthread_mutex_unlock(&philo->args->finished_mutex);
@@ -59,8 +59,6 @@ int	free_philo(t_args *args, t_philo *philo, int i)
 {
 	while (i < args->num_of_philo)
 	{
-		if (pthread_mutex_destroy(&philo[i].eat_count_mutex))
-			return (1);
 		if (pthread_mutex_destroy(&philo[i].last_eat_mutex))
 			return (1);
 		i++;

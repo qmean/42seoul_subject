@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyumkim <kyumkim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: kyuminkim <kyuminkim@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 23:07:06 by kyumkim           #+#    #+#             */
-/*   Updated: 2024/06/27 00:55:29 by kyumkim          ###   ########.fr       */
+/*   Updated: 2024/07/03 14:07:54 by kyuminkim        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ typedef struct s_philo
 	int				right;
 	int				eat_count;
 	long long		last_eat;
-	pthread_mutex_t	eat_count_mutex;
 	pthread_mutex_t	last_eat_mutex;
 	pthread_t		thread;
 	t_args			*args;

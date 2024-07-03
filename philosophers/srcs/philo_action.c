@@ -6,7 +6,7 @@
 /*   By: kyuminkim <kyuminkim@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 02:34:43 by kyumkim           #+#    #+#             */
-/*   Updated: 2024/06/29 20:31:11 by kyuminkim        ###   ########.fr       */
+/*   Updated: 2024/07/03 14:43:32 by kyuminkim        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,17 @@ void	*routine(void *philo)
 		usleep(cur_philo->args->time_to_eat * 100);
 	while (1)
 	{
-		if (!check_finished_routine(cur_philo))
-			philo_eat(cur_philo);
-		else
+		if (check_finished_routine(cur_philo))
 			break ;
+		philo_eat(cur_philo);
 		if (cur_philo->args->num_of_philo == 1)
 			break ;
-		if (!check_finished_routine(cur_philo))
-			philo_sleep(cur_philo);
-		else
+		if (check_finished_routine(cur_philo))
 			break ;
-		if (!check_finished_routine(cur_philo))
-			philo_think(cur_philo);
-		else
+		philo_sleep(cur_philo);
+		if (check_finished_routine(cur_philo))
 			break ;
+		philo_think(cur_philo);
 		usleep(10);
 	}
 	return (0);
